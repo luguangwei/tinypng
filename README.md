@@ -7,10 +7,10 @@
 > step3: 压缩后的图片导出在afterImgBox中
 
 ## done:
-===================
+
 导出前，清空afterImgBox
 
 
 ## todo:
-===================
+
 imgBox中文件结构完全导出到afterImgBox中
