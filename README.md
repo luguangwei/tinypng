@@ -6,11 +6,11 @@
 > step2: node app.js
 > step3: 压缩后的图片导出在afterImgBox中
 
-##done:
+## done:
 -------------------
 导出前，清空afterImgBox
 
 
-##todo:
+## todo:
 ------------------
 imgBox中文件结构完全导出到afterImgBox中
