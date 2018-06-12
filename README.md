@@ -4,7 +4,7 @@
 
 > step1: 把图片丢在imgbox
 
-> step2: node app.js
+> step2: npm start
 
 > step3: 压缩后的图片导出在afterImgBox中
 
