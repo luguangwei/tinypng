@@ -11,7 +11,7 @@ function deleteDir(path,cb){
     if (!fs.existsSync(path)) return;
 
     const files = fs.readdirSync(path);
-    const rmdirDir = (path) => fs.rmdirSync(path);
+    const rmdirDir = (path) => fs.existsSync(path) && fs.rmdirSync(path);
 
     if (files.length > 0){
         files.map(file =>{
@@ -31,15 +31,33 @@ function deleteDir(path,cb){
     cb && cb(path);
 }
 
+// copy Dir
+function copyDir(beforePath, afterPath, cb=()=>{}){
+    
+    const files = fs.readdirSync(beforePath);
+    fs.existsSync(afterPath) || fs.mkdirSync(afterPath);
+
+    if (files.length>0){
+        files.map(file =>{
+            const status = fs.statSync(`${beforePath}/${file}`);
+            if (status.isDirectory()){
+                copyDir(`${beforePath}/${file}`, `${afterPath}/${file}`)
+            }else{
+                console.log(`写入了${afterPath}/${file}`);
+                const source = tinify.fromFile(`${beforePath}/${file}`);
+                source.toFile(`${afterPath}/${file}`);
+            }
+        })
+    }  
+}
+
 fs.readdir(`${filesDir}/imgBox`, (err, files) => {
     if (err) throw err;
 
-    deleteDir(`${filesDir}/afterImgBox`);
     if (!fs.existsSync(`${filesDir}/afterImgBox`)) { fs.mkdirSync(`${filesDir}/afterImgBox`)};
-   
-    files.map( fileName =>{
-        const source = tinify.fromFile(`${filesDir}/imgBox/${fileName}`);
-        source.toFile(`${filesDir}/afterImgBox/${fileName}`);
-    })
+
+    deleteDir(`${filesDir}/afterImgBox`);
+    
+    copyDir(`${filesDir}/imgBox`, `${filesDir}/afterImgBox`);
 });
 

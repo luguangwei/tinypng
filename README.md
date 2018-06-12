@@ -13,7 +13,9 @@
 
 导出前，清空afterImgBox
 
+imgBox中文件结构完全导出到afterImgBox中
+
 
 ## todo:
 
-imgBox中文件结构完全导出到afterImgBox中
+
